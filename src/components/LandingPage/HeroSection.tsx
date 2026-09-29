@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { playSound } from '../../utils/soundEffects';
-import { ArrowRight, Play, Compass, Sparkles, Activity, ShieldCheck, Zap, Radio, Layers } from 'lucide-react';
+import { ArrowRight, Play, Sparkles, Activity, ShieldCheck, Zap, Radio, Bot, Layers } from 'lucide-react';
 
 interface HeroSectionProps {
   onLaunchDemo: () => void;
   onExploreArch: () => void;
+  onExploreCopilot?: () => void;
 }
 
-export const HeroSection: React.FC<HeroSectionProps> = ({ onLaunchDemo, onExploreArch }) => {
+export const HeroSection: React.FC<HeroSectionProps> = ({ 
+  onLaunchDemo, 
+  onExploreArch,
+  onExploreCopilot
+}) => {
   const [telemetry, setTelemetry] = useState({
     latency: 18.4,
     bandwidthSaved: 99.8,
@@ -27,48 +32,65 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onLaunchDemo, onExplor
     return () => clearInterval(interval);
   }, []);
 
+  const handleCopilotScroll = () => {
+    playSound('tab');
+    const el = document.getElementById('copilot-showcase');
+    el?.scrollIntoView({ behavior: 'smooth' });
+    if (onExploreCopilot) onExploreCopilot();
+  };
+
   return (
-    <section id="hero" className="relative min-h-screen w-full flex flex-col justify-between pt-28 pb-12 px-6 sm:px-12 bg-black overflow-hidden select-none">
-      {/* Cinematic Orbital Backdrop (Image 1 Style) */}
+    <section id="hero" className="relative min-h-[92vh] w-full flex flex-col justify-between pt-28 pb-12 px-6 sm:px-12 overflow-hidden bg-slate-950 select-none">
+      {/* Cinematic Orbital Backdrop Image (Retained as user requested) */}
       <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-90 transition-transform duration-1000 scale-100"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-95 transition-transform duration-1000 scale-100"
         style={{ backgroundImage: `url('/assets/space_orbital_arc.jpg')` }}
       >
-        {/* Soft Vignette Gradient */}
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-slate-950/80 pointer-events-none" />
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-transparent to-slate-950/50 pointer-events-none" />
+        {/* Crisp Gradient Transition into Light Background */}
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/30 to-slate-950/70 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-950/85 via-slate-950/30 to-transparent pointer-events-none" />
       </div>
 
-      {/* Top / Main Hero Content Area (Image 1 & 3 Typography) */}
-      <div className="relative z-10 max-w-4xl pt-8 sm:pt-16">
+      {/* Main Hero Content Area */}
+      <div className="relative z-10 max-w-4xl pt-6 sm:pt-14">
         {/* Mission Pill Header */}
-        <div className="inline-flex items-center space-x-2 text-xs uppercase tracking-[0.25em] text-blue-300 font-mono mb-4">
-          <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-ping"></span>
-          <span>MISSION SUTRA-01 • ISRO BAS PAYLOAD</span>
+        <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-white/15 text-white backdrop-blur-md border border-white/20 text-xs font-mono mb-4 shadow-lg">
+          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+          <span className="font-semibold">MISSION SUTRA-01</span>
+          <span className="text-white/40">|</span>
+          <span className="text-blue-300">ISRO BAS EXPERIMENT PAYLOAD</span>
         </div>
 
-        {/* Large Elegant Heading (Inspired by "The Spacecraft" / "Moon Mission") */}
+        {/* Heading */}
         <h1 className="text-5xl sm:text-7xl lg:text-8xl font-light tracking-tight text-white leading-tight font-sans">
-          The Space <span className="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-200 to-blue-400">AI</span>
+          The Space <span className="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-200 via-sky-300 to-white">AI</span>
         </h1>
 
-        {/* Minimal High-Impact Subtitle */}
-        <p className="mt-4 text-base sm:text-xl text-slate-300 max-w-2xl font-light leading-relaxed">
+        {/* Minimal Subtitle */}
+        <p className="mt-4 text-base sm:text-xl text-slate-200 max-w-2xl font-normal leading-relaxed drop-shadow-md">
           Zero-cloud edge intelligence for microgravity experiments. Real-time human activity recognition, 
           causal action segmentation, and offline cognitive RAG on NVIDIA Jetson AGX Orin.
         </p>
 
-        {/* Clean Pill Buttons (Image 3 Style: + Explore Missions) */}
+        {/* Action Pills */}
         <div className="mt-8 flex flex-wrap items-center gap-4">
           <button
             onClick={() => {
               playSound('success');
               onLaunchDemo();
             }}
-            className="inline-flex items-center space-x-3 px-8 py-3.5 rounded-full bg-white text-slate-950 hover:bg-blue-400 hover:text-white font-medium text-sm tracking-wide transition-all shadow-xl shadow-white/10 hover:shadow-blue-500/30 transform hover:-translate-y-0.5 active:translate-y-0"
+            className="inline-flex items-center space-x-2.5 px-8 py-3.5 rounded-full bg-blue-600 hover:bg-blue-500 text-white font-semibold text-sm tracking-wide transition-all shadow-xl shadow-blue-600/30 hover:scale-105 active:scale-95"
           >
             <span className="text-lg font-bold">+</span>
             <span>Launch Mission Control</span>
+          </button>
+
+          <button
+            onClick={handleCopilotScroll}
+            className="inline-flex items-center space-x-2 px-7 py-3.5 rounded-full bg-white/90 hover:bg-white text-slate-900 border border-white text-sm font-semibold tracking-wide transition-all shadow-lg backdrop-blur-md hover:scale-105"
+          >
+            <Bot className="w-4 h-4 text-blue-600" />
+            <span>Try AI Copilot & RAG</span>
           </button>
 
           <button
@@ -76,77 +98,65 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onLaunchDemo, onExplor
               playSound('tab');
               onExploreArch();
             }}
-            className="inline-flex items-center space-x-2 px-7 py-3.5 rounded-full bg-white/5 hover:bg-white/10 text-white border border-white/20 text-sm font-medium tracking-wide transition-all backdrop-blur-md"
+            className="inline-flex items-center space-x-2 px-6 py-3.5 rounded-full bg-white/10 hover:bg-white/20 text-white border border-white/30 text-sm font-medium tracking-wide transition-all backdrop-blur-md"
           >
-            <span>Explore 4-Layer Architecture</span>
-            <ArrowRight className="w-4 h-4 text-blue-400" />
+            <span>Architecture</span>
+            <ArrowRight className="w-4 h-4 text-sky-300" />
           </button>
         </div>
       </div>
 
-      {/* Bottom Orbital Metadata & Minimalist Live Telemetry Bar */}
-      <div className="relative z-10 w-full pt-16">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-4 sm:p-5 rounded-2xl bg-slate-950/75 border border-white/10 backdrop-blur-xl shadow-2xl">
+      {/* Floating Light Aerospace Telemetry Bar */}
+      <div className="relative z-10 w-full pt-12">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-5 rounded-3xl bg-white/95 border border-slate-200/90 backdrop-blur-2xl shadow-2xl">
           {/* Stat 1 */}
-          <div className="p-3 border-r border-white/10 last:border-0">
-            <div className="flex items-center space-x-2 text-xs font-mono text-slate-400 uppercase tracking-wider">
-              <Zap className="w-3.5 h-3.5 text-blue-400" />
+          <div className="p-3 border-r border-slate-200 last:border-0">
+            <div className="flex items-center space-x-2 text-xs font-mono text-slate-500 uppercase tracking-wider">
+              <Zap className="w-3.5 h-3.5 text-blue-600" />
               <span>Inference Latency</span>
             </div>
             <div className="mt-1 flex items-baseline space-x-1.5">
-              <span className="text-2xl sm:text-3xl font-mono font-bold text-white">&lt; {telemetry.latency}</span>
-              <span className="text-xs font-mono text-blue-400">ms</span>
+              <span className="text-2xl sm:text-3xl font-mono font-extrabold text-slate-900">&lt; {telemetry.latency}</span>
+              <span className="text-xs font-mono font-bold text-blue-600">ms</span>
             </div>
-            <p className="text-[11px] text-slate-400 mt-0.5">50x faster than ground relay</p>
+            <p className="text-[11px] text-slate-500 mt-0.5">50x faster than ground uplink</p>
           </div>
 
           {/* Stat 2 */}
-          <div className="p-3 border-r border-white/10 last:border-0">
-            <div className="flex items-center space-x-2 text-xs font-mono text-slate-400 uppercase tracking-wider">
-              <Radio className="w-3.5 h-3.5 text-emerald-400" />
+          <div className="p-3 border-r border-slate-200 last:border-0">
+            <div className="flex items-center space-x-2 text-xs font-mono text-slate-500 uppercase tracking-wider">
+              <Radio className="w-3.5 h-3.5 text-emerald-600" />
               <span>Telemetry Downlink</span>
             </div>
             <div className="mt-1 flex items-baseline space-x-1.5">
-              <span className="text-2xl sm:text-3xl font-mono font-bold text-emerald-400">&gt; {telemetry.bandwidthSaved}%</span>
+              <span className="text-2xl sm:text-3xl font-mono font-extrabold text-emerald-600">&gt; {telemetry.bandwidthSaved}%</span>
             </div>
-            <p className="text-[11px] text-slate-400 mt-0.5">0.08 MB/s vector compression</p>
+            <p className="text-[11px] text-slate-500 mt-0.5">0.08 MB/s vector compression</p>
           </div>
 
           {/* Stat 3 */}
-          <div className="p-3 border-r border-white/10 last:border-0">
-            <div className="flex items-center space-x-2 text-xs font-mono text-slate-400 uppercase tracking-wider">
-              <ShieldCheck className="w-3.5 h-3.5 text-cyan-400" />
+          <div className="p-3 border-r border-slate-200 last:border-0">
+            <div className="flex items-center space-x-2 text-xs font-mono text-slate-500 uppercase tracking-wider">
+              <ShieldCheck className="w-3.5 h-3.5 text-blue-600" />
               <span>Cloud Reliance</span>
             </div>
             <div className="mt-1 flex items-baseline space-x-1.5">
-              <span className="text-2xl sm:text-3xl font-mono font-bold text-cyan-300">0%</span>
-              <span className="text-xs font-mono text-slate-400">(Offline)</span>
+              <span className="text-2xl sm:text-3xl font-mono font-extrabold text-blue-700">0%</span>
+              <span className="text-xs font-mono text-slate-500">(100% Offline)</span>
             </div>
-            <p className="text-[11px] text-slate-400 mt-0.5">Zero LOS blackout risk</p>
+            <p className="text-[11px] text-slate-500 mt-0.5">Zero LOS blackout risk</p>
           </div>
 
           {/* Stat 4 */}
           <div className="p-3">
-            <div className="flex items-center space-x-2 text-xs font-mono text-slate-400 uppercase tracking-wider">
-              <Activity className="w-3.5 h-3.5 text-purple-400" />
+            <div className="flex items-center space-x-2 text-xs font-mono text-slate-500 uppercase tracking-wider">
+              <Activity className="w-3.5 h-3.5 text-purple-600" />
               <span>Edge Target</span>
             </div>
             <div className="mt-1 flex items-baseline space-x-1.5">
-              <span className="text-xl sm:text-2xl font-mono font-bold text-white">Jetson Orin</span>
+              <span className="text-xl sm:text-2xl font-mono font-extrabold text-slate-900">Jetson Orin</span>
             </div>
-            <p className="text-[11px] text-slate-400 mt-0.5">{telemetry.power}W Power Envelope</p>
-          </div>
-        </div>
-
-        {/* Minimalist Timestamp & Mission Badge (Image 1 Style) */}
-        <div className="mt-4 flex flex-col sm:flex-row items-center justify-between text-xs font-mono text-slate-500 gap-2">
-          <div>
-            ISRO Human Space Flight Mission (HSFC) Compatible Standard
-          </div>
-          <div className="flex items-center space-x-3 text-slate-400">
-            <span>275 TOPS Ampere Edge TensorRT</span>
-            <span>•</span>
-            <span className="text-emerald-400">FLIGHT READY 🇮🇳</span>
+            <p className="text-[11px] text-slate-500 mt-0.5">{telemetry.power}W Power Envelope</p>
           </div>
         </div>
       </div>

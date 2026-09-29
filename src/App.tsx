@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ViewMode } from './types';
 import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/LandingPage/HeroSection';
-import { CockpitHudShowcase } from './components/LandingPage/CockpitHudShowcase';
+import { CopilotShowcaseSection } from './components/LandingPage/CopilotShowcaseSection';
 import { ProblemSolution } from './components/LandingPage/ProblemSolution';
 import { ArchitecturePipeline } from './components/LandingPage/ArchitecturePipeline';
 import { BenchmarksSection } from './components/LandingPage/BenchmarksSection';
@@ -35,6 +35,14 @@ export function App() {
     }, 100);
   };
 
+  const handleExploreCopilot = () => {
+    setCurrentView('landing');
+    setTimeout(() => {
+      const el = document.getElementById('copilot-showcase');
+      el?.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
+  };
+
   // Keyboard shortcuts
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -53,8 +61,8 @@ export function App() {
   }, [isSoundOn]);
 
   return (
-    <div className="min-h-screen bg-black text-slate-100 font-sans selection:bg-blue-500 selection:text-white flex flex-col">
-      {/* Global Aerospace Navbar */}
+    <div className="min-h-screen bg-slate-50 text-slate-900 font-sans selection:bg-blue-600 selection:text-white flex flex-col">
+      {/* Global Clean Light Aerospace Navbar */}
       <Navbar
         currentView={currentView}
         onViewChange={setCurrentView}
@@ -70,11 +78,10 @@ export function App() {
           <div>
             <HeroSection 
               onLaunchDemo={handleLaunchDemo} 
-              onExploreArch={handleExploreArch} 
+              onExploreArch={handleExploreArch}
+              onExploreCopilot={handleExploreCopilot}
             />
-            <CockpitHudShowcase 
-              onLaunchDemo={handleLaunchDemo} 
-            />
+            <CopilotShowcaseSection />
             <ProblemSolution />
             <ArchitecturePipeline />
             <BenchmarksSection />

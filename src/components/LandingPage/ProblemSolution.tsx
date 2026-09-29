@@ -7,139 +7,137 @@ import {
   Layers, 
   Cpu, 
   FileText, 
-  Sparkles,
-  ShieldAlert,
-  Zap,
-  ArrowRight
+  Sparkles, 
+  ShieldAlert, 
+  Zap 
 } from 'lucide-react';
-import { playSound } from '../../utils/soundEffects';
 
 export const ProblemSolution: React.FC = () => {
   return (
-    <section id="problem-solution" className="py-24 px-6 sm:px-12 bg-black border-b border-white/10 relative">
+    <section id="problem-solution" className="py-20 px-6 sm:px-12 bg-white border-b border-slate-200 relative">
       <div className="max-w-7xl mx-auto">
-        {/* Minimal Section Header */}
-        <div className="max-w-3xl mb-16">
-          <div className="inline-flex items-center space-x-2 text-xs uppercase tracking-[0.25em] text-blue-400 font-mono mb-3">
-            <span className="w-1.5 h-1.5 rounded-full bg-blue-400"></span>
-            <span>OPERATIONAL GAP VS SUTRA PARADIGM</span>
+        {/* Section Header */}
+        <div className="max-w-3xl mb-14">
+          <div className="inline-flex items-center space-x-2 text-xs uppercase tracking-[0.2em] text-blue-700 font-mono mb-2 font-semibold">
+            <span className="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
+            <span>SPACE OPERATIONAL GAP VS EDGE AI</span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-light tracking-tight text-white font-sans">
-            The Microgravity Challenge & <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-emerald-400">Edge Solution</span>
+          <h2 className="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight font-sans">
+            The Microgravity Challenge & <span className="text-gradient-cyan-blue">Edge Solution</span>
           </h2>
         </div>
 
-        {/* 2-Column High-Impact Minimalist Comparison */}
+        {/* 2-Column Comparison */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* PROBLEM CARD (Minimalist Dark Glass with subtle red border) */}
-          <div className="p-8 rounded-3xl bg-slate-950/90 border border-rose-500/20 backdrop-blur-xl relative overflow-hidden flex flex-col justify-between">
+          {/* PROBLEM CARD */}
+          <div className="p-8 rounded-3xl bg-rose-50/40 border border-rose-200/80 shadow-sm relative overflow-hidden flex flex-col justify-between">
             <div>
               <div className="flex items-center space-x-3 mb-6">
-                <div className="p-2.5 rounded-full bg-rose-500/10 text-rose-400 border border-rose-500/20">
-                  <ShieldAlert className="w-5 h-5" />
+                <div className="p-3 rounded-2xl bg-rose-100 text-rose-600 border border-rose-200 shadow-sm">
+                  <ShieldAlert className="w-6 h-6" />
                 </div>
                 <div>
-                  <span className="text-[10px] font-mono uppercase tracking-widest text-rose-400">
-                    SPACE TELEMETRY BOTTLENECK
+                  <span className="text-[10px] font-mono uppercase tracking-widest text-rose-700 font-bold">
+                    CRITICAL SPACE VULNERABILITY
                   </span>
-                  <h3 className="text-xl font-bold text-white">
-                    Ground-Dependent Limitations
+                  <h3 className="text-xl font-bold text-slate-900">
+                    Ground-Dependent Telemetry Lag
                   </h3>
                 </div>
               </div>
 
               <div className="space-y-4">
-                <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/5 space-y-1">
-                  <div className="flex items-center space-x-2 text-rose-300 font-mono text-xs font-semibold">
-                    <Radio className="w-4 h-4 text-rose-400" />
+                <div className="p-4 rounded-2xl bg-white border border-rose-100 shadow-sm space-y-1">
+                  <div className="flex items-center space-x-2 text-rose-700 font-mono text-xs font-bold">
+                    <Radio className="w-4 h-4 text-rose-600" />
                     <span>15+ Min Ground Latency & LOS Blackouts</span>
                   </div>
-                  <p className="text-xs text-slate-400 leading-relaxed pl-6">
-                    Orbital passes cause communication loss. Relying on ground control risks sample destruction during critical bio-reactions.
+                  <p className="text-xs text-slate-600 leading-relaxed pl-6">
+                    Orbital passes cause communication loss. Relying on ground control risks irreversible sample degradation during rapid chemical/cellular steps.
                   </p>
                 </div>
 
-                <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/5 space-y-1">
-                  <div className="flex items-center space-x-2 text-rose-300 font-mono text-xs font-semibold">
-                    <Orbit className="w-4 h-4 text-rose-400" />
+                <div className="p-4 rounded-2xl bg-white border border-rose-100 shadow-sm space-y-1">
+                  <div className="flex items-center space-x-2 text-rose-700 font-mono text-xs font-bold">
+                    <Orbit className="w-4 h-4 text-rose-600" />
                     <span>6-DOF Floating Tool Drift & Occlusion</span>
                   </div>
-                  <p className="text-xs text-slate-400 leading-relaxed pl-6">
-                    In zero gravity, pipettes and vials drift freely with arbitrary 3D orientations, breaking standard 2D detection models.
+                  <p className="text-xs text-slate-600 leading-relaxed pl-6">
+                    In zero gravity, micropipettes, cryo-vials, and reagents float freely with unconstrained 3D orientations, breaking standard 2D bounding box vision.
                   </p>
                 </div>
 
-                <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/5 space-y-1">
-                  <div className="flex items-center space-x-2 text-rose-300 font-mono text-xs font-semibold">
-                    <AlertTriangle className="w-4 h-4 text-rose-400" />
-                    <span>48 MB/s Telemetry Bandwidth Saturation</span>
+                <div className="p-4 rounded-2xl bg-white border border-rose-100 shadow-sm space-y-1">
+                  <div className="flex items-center space-x-2 text-rose-700 font-mono text-xs font-bold">
+                    <AlertTriangle className="w-4 h-4 text-rose-600" />
+                    <span>48 MB/s Video Downlink Saturation</span>
                   </div>
-                  <p className="text-xs text-slate-400 leading-relaxed pl-6">
-                    Raw 4K video downlink consumes extreme satellite RF power and incurs heavy transmission costs.
+                  <p className="text-xs text-slate-600 leading-relaxed pl-6">
+                    Downlinking uncompressed 4K video overburdens Deep Space Network channels and incurs immense spacecraft RF power draw.
                   </p>
                 </div>
               </div>
             </div>
 
-            <div className="mt-6 pt-4 border-t border-rose-500/20 flex items-center justify-between text-xs font-mono text-rose-400">
-              <span>Risk: Protocol Failure</span>
-              <span className="font-bold">HIGH RISK</span>
+            <div className="mt-6 pt-4 border-t border-rose-200 flex items-center justify-between text-xs font-mono text-rose-700 font-bold">
+              <span>Risk: Experiment Abort / Protocol Failure</span>
+              <span className="px-2.5 py-0.5 rounded-full bg-rose-100 border border-rose-300">HIGH RISK</span>
             </div>
           </div>
 
-          {/* SOLUTION CARD (Minimalist Dark Glass with emerald border) */}
-          <div className="p-8 rounded-3xl bg-slate-950/90 border border-emerald-500/30 backdrop-blur-xl relative overflow-hidden flex flex-col justify-between">
+          {/* SOLUTION CARD */}
+          <div className="p-8 rounded-3xl bg-emerald-50/40 border border-emerald-200/80 shadow-sm relative overflow-hidden flex flex-col justify-between">
             <div>
               <div className="flex items-center space-x-3 mb-6">
-                <div className="p-2.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
-                  <Sparkles className="w-5 h-5" />
+                <div className="p-3 rounded-2xl bg-emerald-100 text-emerald-600 border border-emerald-200 shadow-sm">
+                  <Sparkles className="w-6 h-6" />
                 </div>
                 <div>
-                  <span className="text-[10px] font-mono uppercase tracking-widest text-emerald-400">
+                  <span className="text-[10px] font-mono uppercase tracking-widest text-emerald-700 font-bold">
                     EDGE-NATIVE AUTONOMY
                   </span>
-                  <h3 className="text-xl font-bold text-white">
+                  <h3 className="text-xl font-bold text-slate-900">
                     The SUTRA Solution
                   </h3>
                 </div>
               </div>
 
               <div className="space-y-4">
-                <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/5 space-y-1 hover:border-emerald-500/40 transition-colors">
-                  <div className="flex items-center space-x-2 text-emerald-400 font-mono text-xs font-semibold">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                <div className="p-4 rounded-2xl bg-white border border-emerald-100 shadow-sm space-y-1 hover:border-emerald-300 transition-colors">
+                  <div className="flex items-center space-x-2 text-emerald-700 font-mono text-xs font-bold">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600" />
                     <span>Real-Time Edge Vision (YOLOv11 + Video Swin)</span>
                   </div>
-                  <p className="text-xs text-slate-300 leading-relaxed pl-6">
-                    42+ FPS on Jetson AGX Orin with 3D shifted window attention to track zero-g tool dynamics with zero cloud reliance.
+                  <p className="text-xs text-slate-600 leading-relaxed pl-6">
+                    42+ FPS on NVIDIA Jetson AGX Orin with 3D shifted window attention to track zero-g tool dynamics with zero cloud reliance.
                   </p>
                 </div>
 
-                <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/5 space-y-1 hover:border-emerald-500/40 transition-colors">
-                  <div className="flex items-center space-x-2 text-emerald-400 font-mono text-xs font-semibold">
-                    <Cpu className="w-4 h-4 text-emerald-400" />
-                    <span>Causal Step Verification (1D-TCN)</span>
+                <div className="p-4 rounded-2xl bg-white border border-emerald-100 shadow-sm space-y-1 hover:border-emerald-300 transition-colors">
+                  <div className="flex items-center space-x-2 text-emerald-700 font-mono text-xs font-bold">
+                    <Cpu className="w-4 h-4 text-emerald-600" />
+                    <span>Causal Action Segmentation (1D-TCN)</span>
                   </div>
-                  <p className="text-xs text-slate-300 leading-relaxed pl-6">
-                    Dilated temporal networks segment multi-step protocols in real time, alerting astronauts in &lt;50ms upon skipped steps.
+                  <p className="text-xs text-slate-600 leading-relaxed pl-6">
+                    Dilated temporal convolutional networks verify SOP procedural adherence in real time, alerting astronauts in &lt;50ms upon skipped steps.
                   </p>
                 </div>
 
-                <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/5 space-y-1 hover:border-emerald-500/40 transition-colors">
-                  <div className="flex items-center space-x-2 text-emerald-400 font-mono text-xs font-semibold">
-                    <FileText className="w-4 h-4 text-emerald-400" />
+                <div className="p-4 rounded-2xl bg-white border border-emerald-100 shadow-sm space-y-1 hover:border-emerald-300 transition-colors">
+                  <div className="flex items-center space-x-2 text-emerald-700 font-mono text-xs font-bold">
+                    <FileText className="w-4 h-4 text-emerald-600" />
                     <span>Local Offline RAG (Llama-3-8B + FAISS GPU)</span>
                   </div>
-                  <p className="text-xs text-slate-300 leading-relaxed pl-6">
-                    Instant &lt;3ms semantic query over 10,000+ pages of ISRO flight manuals, with Whisper.cpp voice command execution.
+                  <p className="text-xs text-slate-600 leading-relaxed pl-6">
+                    Instant &lt;3ms semantic query over 10,000+ pages of ISRO flight manuals, with hands-free Whisper.cpp speech recognition.
                   </p>
                 </div>
               </div>
             </div>
 
-            <div className="mt-6 pt-4 border-t border-emerald-500/30 flex items-center justify-between text-xs font-mono text-emerald-400">
-              <span>Operational Autonomy: 100% Offline</span>
-              <span className="px-2.5 py-0.5 rounded-full bg-emerald-500/20 font-bold border border-emerald-500/40">OPTIMAL</span>
+            <div className="mt-6 pt-4 border-t border-emerald-200 flex items-center justify-between text-xs font-mono text-emerald-700 font-bold">
+              <span>Operational Autonomy: 100% Offline Edge</span>
+              <span className="px-2.5 py-0.5 rounded-full bg-emerald-100 border border-emerald-300">OPTIMAL</span>
             </div>
           </div>
         </div>

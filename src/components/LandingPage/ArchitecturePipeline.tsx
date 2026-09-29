@@ -41,7 +41,7 @@ const ARCHITECTURE_LAYERS: ArchitectureLayer[] = [
     name: 'Vision & Microgravity Perception',
     subtitle: 'Zero-G 6-DOF Tool Tracking & Hand Pose Estimation',
     tag: 'LAYER 1: PERCEPTION',
-    icon: <Eye className="w-5 h-5 text-blue-400" />,
+    icon: <Eye className="w-5 h-5 text-blue-600" />,
     models: ['YOLOv11-Nano (TensorRT FP16)', 'Video Swin Transformer (3D Shifts)', 'MediaPipe Microgravity-Tuned Hands'],
     latency: '12.4 ms',
     throughput: '45.2 FPS',
@@ -67,7 +67,7 @@ const detections = await visionNode.inferMultiScale({
   trackMicrogravityDrift: true
 });
 // Outputs: BoundingBoxes, 3D Pose Keypoints, Hand-Object Contact Graph`,
-    tensorEngine: 'NVIDIA TensorRT 10.0 + Jetson DLA (Deep Learning Accelerator)',
+    tensorEngine: 'NVIDIA TensorRT 10.0 + Jetson DLA',
     dataFlow: {
       input: 'Dual 1080p@60fps RGB Sensor Streams',
       transformation: 'Spatio-Temporal Window Attention + Dynamic Anchorless Bounding Boxes',
@@ -79,7 +79,7 @@ const detections = await visionNode.inferMultiScale({
     name: 'Sequence Logic & Occlusion Engine',
     subtitle: 'Causal Action Segmentation & Procedural Error Alerting',
     tag: 'LAYER 2: SEQUENCE LOGIC',
-    icon: <Layers className="w-5 h-5 text-emerald-400" />,
+    icon: <Layers className="w-5 h-5 text-emerald-600" />,
     models: ['Dilated 1D-TCN (Temporal Convolutional Network)', 'HO-RCNN (Hand-Object Interaction)', 'Markov State Automata'],
     latency: '5.8 ms',
     throughput: '120 Hz Eval Rate',
@@ -120,7 +120,7 @@ if (anomalyFlag.isDeviationDetected) {
     name: 'Cognitive Local RAG Pipeline',
     subtitle: 'Zero-Cloud ISRO Manual QA & Intelligent Astronaut Copilot',
     tag: 'LAYER 3: COGNITIVE RAG',
-    icon: <Database className="w-5 h-5 text-amber-400" />,
+    icon: <Database className="w-5 h-5 text-amber-600" />,
     models: ['Llama-3-8B-Instruct (4-Bit GGUF / llama.cpp)', 'BGE-Small-EN-v1.5 Quantized Embeddings', 'FAISS GPU Indexing'],
     latency: '2.8 ms (Vector Search)',
     throughput: '28.4 Tokens/Sec',
@@ -155,7 +155,7 @@ const responseStream = await LlamaCppEngine.generate({
     name: 'Voice & Hardware Execution',
     subtitle: 'Ultra-Low Power Jetson AGX Orin Hardware Orchestration',
     tag: 'LAYER 4: HARDWARE & SPEECH',
-    icon: <Cpu className="w-5 h-5 text-purple-400" />,
+    icon: <Cpu className="w-5 h-5 text-purple-600" />,
     models: ['Whisper.cpp Tiny/Base (Streaming STT)', 'Piper Neural TTS (Offline Audio Synthesis)', 'Jetson Power Governor'],
     latency: '85 ms (Speech-to-Text)',
     throughput: '38.5 W Average Power',
@@ -196,25 +196,25 @@ export const ArchitecturePipeline: React.FC = () => {
   const activeLayer = ARCHITECTURE_LAYERS.find(l => l.id === activeLayerId) || ARCHITECTURE_LAYERS[0];
 
   return (
-    <section id="architecture" className="py-20 border-b border-slate-800/60 bg-slate-950/80 relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="architecture" className="py-20 px-6 sm:px-12 bg-slate-50 border-b border-slate-200 relative">
+      <div className="max-w-7xl mx-auto">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 text-xs font-mono mb-3">
-            <Cpu className="w-3.5 h-3.5" />
-            <span>4-LAYER MODULAR EDGE STACK</span>
+        <div className="text-center max-w-3xl mx-auto mb-14">
+          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-blue-100 text-blue-800 text-xs font-semibold mb-3">
+            <Cpu className="w-3.5 h-3.5 text-blue-600" />
+            <span>4-LAYER VERTICAL EDGE STACK</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+          <h2 className="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight">
             Interactive Technical Architecture Pipeline
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-slate-400">
+          <p className="mt-3 text-base sm:text-lg text-slate-600">
             A vertically integrated edge AI stack engineered specifically for zero-gravity perception, 
             microsecond action sequencing, and local cognitive autonomy on NVIDIA Jetson AGX Orin.
           </p>
         </div>
 
         {/* 4 Layer Interactive Tab Bar */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
           {ARCHITECTURE_LAYERS.map(layer => {
             const isSelected = layer.id === activeLayerId;
             return (
@@ -224,28 +224,28 @@ export const ArchitecturePipeline: React.FC = () => {
                   playSound('tab');
                   setActiveLayerId(layer.id);
                 }}
-                className={`p-4 rounded-xl text-left border transition-all relative overflow-hidden flex flex-col justify-between ${
+                className={`p-5 rounded-2xl text-left border transition-all relative overflow-hidden flex flex-col justify-between shadow-sm ${
                   isSelected
-                    ? 'bg-blue-600/15 border-blue-500 shadow-lg shadow-blue-500/10 text-white'
-                    : 'bg-slate-900/60 border-slate-800 text-slate-400 hover:text-slate-200 hover:border-slate-700 hover:bg-slate-900'
+                    ? 'bg-white border-blue-500 ring-2 ring-blue-500/20 shadow-md text-slate-900'
+                    : 'bg-white/60 border-slate-200 text-slate-600 hover:bg-white hover:border-slate-300'
                 }`}
               >
                 {isSelected && (
-                  <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-400 to-cyan-400"></div>
+                  <div className="absolute top-0 left-0 right-0 h-1.5 bg-blue-600"></div>
                 )}
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-[10px] font-mono tracking-wider text-blue-400 font-bold uppercase">
+                  <span className="text-[10px] font-mono tracking-wider text-blue-600 font-bold uppercase">
                     {layer.tag}
                   </span>
-                  <div className={`p-1.5 rounded-lg ${isSelected ? 'bg-blue-500/20 text-blue-300' : 'bg-slate-800 text-slate-500'}`}>
+                  <div className={`p-2 rounded-xl ${isSelected ? 'bg-blue-50 text-blue-600' : 'bg-slate-100 text-slate-400'}`}>
                     {layer.icon}
                   </div>
                 </div>
-                <div className="font-mono text-xs sm:text-sm font-bold text-slate-100">
+                <div className="text-sm font-bold text-slate-900 font-sans mt-1">
                   {layer.name}
                 </div>
-                <div className="text-[11px] text-slate-500 font-mono mt-2">
-                  Latency: <span className="text-emerald-400 font-semibold">{layer.latency}</span>
+                <div className="text-xs text-slate-500 font-mono mt-3">
+                  Latency: <span className="text-emerald-600 font-bold">{layer.latency}</span>
                 </div>
               </button>
             );
@@ -253,47 +253,47 @@ export const ArchitecturePipeline: React.FC = () => {
         </div>
 
         {/* Active Layer Deep Dive Card */}
-        <div className="hud-panel rounded-2xl p-6 sm:p-8 bg-slate-900/80 border border-slate-700/80 relative overflow-hidden">
+        <div className="light-glass-panel-elevated rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-xl">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
             {/* Left Col: Specs & Key Functions (7 Cols) */}
             <div className="lg:col-span-7 space-y-6">
               <div>
-                <div className="flex items-center space-x-2 text-xs font-mono text-blue-400 mb-1">
+                <div className="flex items-center space-x-2 text-xs font-mono text-blue-600 font-bold mb-1">
                   <span>SYSTEM LAYER {activeLayer.id} SPECIFICATION</span>
                   <span>•</span>
                   <span>{activeLayer.tensorEngine}</span>
                 </div>
-                <h3 className="text-2xl sm:text-3xl font-bold text-white">
+                <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900">
                   {activeLayer.name}
                 </h3>
-                <p className="text-sm text-slate-300 mt-1">
+                <p className="text-sm text-slate-600 mt-1 font-medium">
                   {activeLayer.subtitle}
                 </p>
               </div>
 
               {/* Hardware & Latency Badges */}
               <div className="flex flex-wrap gap-2 text-xs font-mono">
-                <span className="px-2.5 py-1 rounded bg-slate-950 border border-slate-800 text-slate-300">
-                  ⚡ Inference Latency: <strong className="text-emerald-400">{activeLayer.latency}</strong>
+                <span className="px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800">
+                  ⚡ Inference Latency: <strong className="text-emerald-700">{activeLayer.latency}</strong>
                 </span>
-                <span className="px-2.5 py-1 rounded bg-slate-950 border border-slate-800 text-slate-300">
-                  📊 Throughput: <strong className="text-blue-400">{activeLayer.throughput}</strong>
+                <span className="px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-800">
+                  📊 Throughput: <strong className="text-blue-700">{activeLayer.throughput}</strong>
                 </span>
-                <span className="px-2.5 py-1 rounded bg-slate-950 border border-slate-800 text-slate-300">
-                  🎯 Engine: <strong className="text-purple-400">TensorRT / CUDA</strong>
+                <span className="px-3 py-1 rounded-full bg-purple-50 border border-purple-200 text-purple-800">
+                  🎯 Engine: <strong className="text-purple-700">TensorRT / CUDA</strong>
                 </span>
               </div>
 
               {/* Models Deployed */}
               <div className="space-y-2">
-                <span className="text-xs font-mono text-slate-400 uppercase tracking-wider font-semibold">
+                <span className="text-xs font-mono text-slate-500 uppercase tracking-wider font-bold">
                   ACTIVE NEURAL ARCHITECTURES:
                 </span>
                 <div className="flex flex-wrap gap-2">
                   {activeLayer.models.map((model, idx) => (
                     <span
                       key={idx}
-                      className="px-2.5 py-1 rounded-md bg-blue-950/70 border border-blue-500/30 text-blue-300 text-xs font-mono"
+                      className="px-3 py-1 rounded-lg bg-slate-100 border border-slate-200 text-slate-800 text-xs font-mono font-medium"
                     >
                       {model}
                     </span>
@@ -303,69 +303,66 @@ export const ArchitecturePipeline: React.FC = () => {
 
               {/* Key Capabilities */}
               <div className="space-y-2">
-                <span className="text-xs font-mono text-slate-400 uppercase tracking-wider font-semibold">
+                <span className="text-xs font-mono text-slate-500 uppercase tracking-wider font-bold">
                   OPERATIONAL CAPABILITIES:
                 </span>
-                <ul className="space-y-2 text-xs sm:text-sm text-slate-300 font-normal">
+                <ul className="space-y-2.5 text-xs sm:text-sm text-slate-700">
                   {activeLayer.keyFunctions.map((func, idx) => (
                     <li key={idx} className="flex items-start space-x-2">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                      <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                       <span>{func}</span>
                     </li>
                   ))}
                 </ul>
               </div>
 
-              {/* Input-Transformation-Output Pipeline */}
-              <div className="p-3.5 rounded-xl bg-slate-950/90 border border-slate-800 space-y-2 text-xs font-mono">
-                <div className="text-[11px] text-slate-400 font-bold uppercase">
+              {/* Data Flow Pipeline */}
+              <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2 text-xs font-mono">
+                <div className="text-[11px] text-slate-500 font-bold uppercase">
                   Data Flow Pipeline:
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-slate-300">
-                  <div className="p-2 rounded bg-slate-900 border border-slate-800">
-                    <span className="text-[10px] text-slate-500 block">INPUT</span>
-                    <span className="text-xs text-blue-300">{activeLayer.dataFlow.input}</span>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-slate-700">
+                  <div className="p-2.5 rounded-xl bg-white border border-slate-200">
+                    <span className="text-[10px] text-slate-400 block font-bold">INPUT</span>
+                    <span className="text-xs text-blue-700 font-medium">{activeLayer.dataFlow.input}</span>
                   </div>
-                  <div className="p-2 rounded bg-slate-900 border border-slate-800">
-                    <span className="text-[10px] text-slate-500 block">TRANSFORM</span>
-                    <span className="text-xs text-emerald-300">{activeLayer.dataFlow.transformation}</span>
+                  <div className="p-2.5 rounded-xl bg-white border border-slate-200">
+                    <span className="text-[10px] text-slate-400 block font-bold">TRANSFORM</span>
+                    <span className="text-xs text-emerald-700 font-medium">{activeLayer.dataFlow.transformation}</span>
                   </div>
-                  <div className="p-2 rounded bg-slate-900 border border-slate-800">
-                    <span className="text-[10px] text-slate-500 block">OUTPUT</span>
-                    <span className="text-xs text-purple-300">{activeLayer.dataFlow.output}</span>
+                  <div className="p-2.5 rounded-xl bg-white border border-slate-200">
+                    <span className="text-[10px] text-slate-400 block font-bold">OUTPUT</span>
+                    <span className="text-xs text-purple-700 font-medium">{activeLayer.dataFlow.output}</span>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Right Col: Live Code & Execution Simulator (5 Cols) */}
+            {/* Right Col: Code Snippet (5 Cols) */}
             <div className="lg:col-span-5 flex flex-col justify-between">
-              <div className="rounded-xl bg-slate-950 border border-slate-800 overflow-hidden shadow-2xl flex flex-col h-full">
-                {/* Code Window Header */}
-                <div className="flex items-center justify-between px-4 py-2.5 bg-slate-900/90 border-b border-slate-800 text-xs font-mono text-slate-400">
+              <div className="rounded-2xl bg-slate-900 text-slate-200 border border-slate-800 overflow-hidden shadow-2xl flex flex-col h-full">
+                <div className="flex items-center justify-between px-4 py-3 bg-slate-950 border-b border-slate-800 text-xs font-mono text-slate-400">
                   <div className="flex items-center space-x-2">
-                    <div className="w-2.5 h-2.5 rounded-full bg-rose-500/80"></div>
-                    <div className="w-2.5 h-2.5 rounded-full bg-amber-500/80"></div>
-                    <div className="w-2.5 h-2.5 rounded-full bg-emerald-500/80"></div>
+                    <div className="w-2.5 h-2.5 rounded-full bg-rose-500"></div>
+                    <div className="w-2.5 h-2.5 rounded-full bg-amber-500"></div>
+                    <div className="w-2.5 h-2.5 rounded-full bg-emerald-500"></div>
                     <span className="ml-2 text-slate-300 text-[11px]">sutra_layer_{activeLayer.id}_engine.ts</span>
                   </div>
-                  <span className="text-[10px] text-blue-400 font-mono">TypeScript / TensorRT</span>
+                  <span className="text-[10px] text-blue-400 font-mono">TensorRT FP16</span>
                 </div>
 
-                {/* Code Body */}
-                <div className="p-4 font-mono text-xs text-slate-300 overflow-x-auto leading-relaxed flex-1 bg-[#050914]">
+                <div className="p-4 font-mono text-xs text-slate-300 overflow-x-auto leading-relaxed flex-1 bg-[#0b0f19]">
                   <pre className="text-[11px] leading-5 text-slate-300">
                     <code>{activeLayer.codeSnippet}</code>
                   </pre>
                 </div>
 
-                {/* Bottom Execution Bar */}
-                <div className="px-4 py-2 bg-slate-900/80 border-t border-slate-800 flex items-center justify-between text-[11px] font-mono">
-                  <span className="flex items-center space-x-1 text-emerald-400">
+                <div className="px-4 py-2.5 bg-slate-950 border-t border-slate-800 flex items-center justify-between text-[11px] font-mono">
+                  <span className="flex items-center space-x-1.5 text-emerald-400 font-bold">
                     <Binary className="w-3.5 h-3.5" />
                     <span>CUDA KERNEL COMPILED (SM_87)</span>
                   </span>
-                  <span className="text-slate-500">0 KB CLOUD UPLINK</span>
+                  <span className="text-slate-400">0 KB CLOUD UPLINK</span>
                 </div>
               </div>
             </div>
