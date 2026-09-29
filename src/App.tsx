@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ViewMode } from './types';
 import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/LandingPage/HeroSection';
+import { CockpitHudShowcase } from './components/LandingPage/CockpitHudShowcase';
 import { ProblemSolution } from './components/LandingPage/ProblemSolution';
 import { ArchitecturePipeline } from './components/LandingPage/ArchitecturePipeline';
 import { BenchmarksSection } from './components/LandingPage/BenchmarksSection';
@@ -34,7 +35,7 @@ export function App() {
     }, 100);
   };
 
-  // Keyboard shortcuts for aerospace HUD feel
+  // Keyboard shortcuts
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) {
@@ -52,8 +53,8 @@ export function App() {
   }, [isSoundOn]);
 
   return (
-    <div className="min-h-screen bg-[#020617] text-slate-100 font-sans selection:bg-blue-600 selection:text-white flex flex-col">
-      {/* Global Aerospace HUD Navigation Bar */}
+    <div className="min-h-screen bg-black text-slate-100 font-sans selection:bg-blue-500 selection:text-white flex flex-col">
+      {/* Global Aerospace Navbar */}
       <Navbar
         currentView={currentView}
         onViewChange={setCurrentView}
@@ -70,6 +71,9 @@ export function App() {
             <HeroSection 
               onLaunchDemo={handleLaunchDemo} 
               onExploreArch={handleExploreArch} 
+            />
+            <CockpitHudShowcase 
+              onLaunchDemo={handleLaunchDemo} 
             />
             <ProblemSolution />
             <ArchitecturePipeline />

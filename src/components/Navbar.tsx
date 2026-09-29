@@ -3,15 +3,14 @@ import { ViewMode } from '../types';
 import { playSound } from '../utils/soundEffects';
 import { 
   Rocket, 
-  Activity, 
+  Volume2, 
+  VolumeX, 
   Layers, 
   Cpu, 
   BarChart3, 
   BookOpen, 
   Play, 
-  Volume2, 
-  VolumeX, 
-  Radio
+  Compass
 } from 'lucide-react';
 
 interface NavbarProps {
@@ -47,121 +46,96 @@ export const Navbar: React.FC<NavbarProps> = ({
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-slate-800/80 bg-slate-950/85 backdrop-blur-xl transition-all duration-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        {/* Left: Branding & Status Badge */}
-        <div className="flex items-center space-x-4">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-slate-950/60 backdrop-blur-md border-b border-white/10 transition-all">
+      <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+        {/* Left: Minimalist ISRO/SUTRA Logo */}
+        <div className="flex items-center space-x-6">
           <button 
             onClick={() => {
               playSound('whoosh');
               onViewChange('landing');
             }} 
-            className="flex items-center space-x-3 text-left group focus:outline-none"
+            className="flex items-center space-x-2.5 text-left group focus:outline-none"
           >
-            <div className="relative flex items-center justify-center w-10 h-10 rounded-lg bg-blue-500/10 border border-blue-500/30 group-hover:border-blue-400 group-hover:bg-blue-500/20 transition-all duration-300">
-              <Rocket className="w-5 h-5 text-blue-400 group-hover:text-blue-300 transition-transform group-hover:scale-110" />
-              <div className="absolute inset-0 rounded-lg bg-blue-400/10 animate-ping pointer-events-none opacity-40"></div>
-            </div>
-            <div>
-              <div className="flex items-center space-x-2">
-                <span className="font-mono text-xl font-extrabold tracking-wider text-white group-hover:text-blue-300 transition-colors">
-                  SUTRA
-                </span>
-                <span className="hidden sm:inline-block text-[10px] px-1.5 py-0.5 rounded bg-blue-500/20 text-blue-400 font-mono font-medium border border-blue-500/30">
-                  v2.4-EDGE
-                </span>
-              </div>
-              <p className="text-[11px] text-slate-400 font-medium hidden md:block">
-                Autonomous Space AI Assistant
-              </p>
-            </div>
+            <span className="text-xl font-bold tracking-widest text-white uppercase group-hover:text-blue-400 transition-colors">
+              SUTRA
+            </span>
+            <span className="text-[10px] px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-300 font-mono border border-blue-500/30">
+              SPACE AI
+            </span>
           </button>
 
-          {/* Blinking Green Edge Node Indicator */}
-          <div className="hidden lg:flex items-center space-x-2 pl-4 border-l border-slate-800 text-xs font-mono">
-            <span className="relative flex h-2.5 w-2.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
-            </span>
-            <span className="text-emerald-400 font-medium text-[11px] tracking-wide">
-              EDGE NODE: ONLINE
-            </span>
-            <span className="text-slate-500 text-[10px] bg-slate-900 px-2 py-0.5 rounded border border-slate-800">
-              JETSON AGX ORIN
-            </span>
+          {/* Minimal Status Dot */}
+          <div className="hidden sm:flex items-center space-x-2 text-xs font-mono text-slate-400">
+            <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span className="text-emerald-400 font-medium">JETSON ORIN ONLINE</span>
           </div>
         </div>
 
-        {/* Center: Navigation Links (Landing mode) */}
+        {/* Center: Minimal Navigation Links */}
         {currentView === 'landing' ? (
-          <nav className="hidden md:flex items-center space-x-1 font-mono text-xs text-slate-300">
+          <nav className="hidden md:flex items-center space-x-8 text-xs tracking-wider uppercase text-slate-300 font-medium">
             <button
-              onClick={() => handleNavClick('architecture')}
-              className={`px-3 py-1.5 rounded-md hover:text-white hover:bg-slate-800/60 transition-colors flex items-center space-x-1.5 ${activeSection === 'architecture' ? 'text-blue-400 bg-blue-500/10' : ''}`}
+              onClick={() => handleNavClick('hero')}
+              className="hover:text-white transition-colors relative py-1"
             >
-              <Layers className="w-3.5 h-3.5" />
-              <span>Architecture</span>
+              Overview
             </button>
             <button
-              onClick={() => handleNavClick('problem-solution')}
-              className={`px-3 py-1.5 rounded-md hover:text-white hover:bg-slate-800/60 transition-colors flex items-center space-x-1.5 ${activeSection === 'problem-solution' ? 'text-blue-400 bg-blue-500/10' : ''}`}
+              onClick={() => handleNavClick('cockpit-hud')}
+              className="hover:text-white transition-colors relative py-1"
             >
-              <Cpu className="w-3.5 h-3.5" />
-              <span>Modules</span>
+              Cockpit HUD
+            </button>
+            <button
+              onClick={() => handleNavClick('architecture')}
+              className="hover:text-white transition-colors relative py-1"
+            >
+              Architecture
             </button>
             <button
               onClick={() => handleNavClick('benchmarks')}
-              className={`px-3 py-1.5 rounded-md hover:text-white hover:bg-slate-800/60 transition-colors flex items-center space-x-1.5 ${activeSection === 'benchmarks' ? 'text-blue-400 bg-blue-500/10' : ''}`}
+              className="hover:text-white transition-colors relative py-1"
             >
-              <BarChart3 className="w-3.5 h-3.5" />
-              <span>Performance</span>
+              Metrics
             </button>
             <button
               onClick={() => handleNavClick('research')}
-              className={`px-3 py-1.5 rounded-md hover:text-white hover:bg-slate-800/60 transition-colors flex items-center space-x-1.5 ${activeSection === 'research' ? 'text-blue-400 bg-blue-500/10' : ''}`}
+              className="hover:text-white transition-colors relative py-1"
             >
-              <BookOpen className="w-3.5 h-3.5" />
-              <span>Research</span>
+              Research
             </button>
           </nav>
         ) : (
-          <div className="flex items-center space-x-2 text-xs font-mono bg-slate-900/90 border border-slate-800 px-3 py-1.5 rounded-lg">
-            <Radio className="w-3.5 h-3.5 text-blue-400 animate-pulse" />
-            <span className="text-slate-400">TELEMETRY STREAM:</span>
-            <span className="text-blue-400 font-bold">42.8 FPS @ 18.2ms</span>
+          <div className="flex items-center space-x-2 text-xs font-mono text-blue-400 bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/30">
+            <span className="w-2 h-2 rounded-full bg-blue-400 animate-ping"></span>
+            <span>MISSION CONTROL ACTIVE</span>
           </div>
         )}
 
-        {/* Right: Sound Toggle & CTA Switcher */}
-        <div className="flex items-center space-x-3">
-          {/* Sound Mute/Unmute */}
+        {/* Right: Sound & Action Pill */}
+        <div className="flex items-center space-x-4">
           <button
             onClick={() => {
               playSound('click');
               onToggleSound();
             }}
-            title={isSoundOn ? 'Mute HUD Audio' : 'Unmute HUD Audio'}
-            className="p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-400 hover:text-white hover:border-slate-700 transition-colors"
+            title={isSoundOn ? 'Mute Audio' : 'Unmute Audio'}
+            className="p-2 rounded-full bg-white/5 border border-white/10 text-slate-300 hover:text-white hover:bg-white/10 transition-all"
           >
-            {isSoundOn ? (
-              <Volume2 className="w-4 h-4 text-blue-400" />
-            ) : (
-              <VolumeX className="w-4 h-4 text-slate-500" />
-            )}
+            {isSoundOn ? <Volume2 className="w-4 h-4 text-blue-400" /> : <VolumeX className="w-4 h-4 text-slate-500" />}
           </button>
 
-          {/* Launch Interactive Demo / Back to Overview Button */}
           {currentView === 'landing' ? (
             <button
               onClick={() => {
                 playSound('success');
                 onViewChange('dashboard');
               }}
-              className="relative group inline-flex items-center space-x-2 px-4 py-2 rounded-lg bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-xs font-mono font-semibold tracking-wide border border-blue-400/40 shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 hover:from-blue-500 hover:to-indigo-500 transition-all duration-300 transform active:scale-95"
+              className="inline-flex items-center space-x-2 px-5 py-2 rounded-full bg-white/10 hover:bg-white text-white hover:text-black border border-white/30 text-xs font-medium tracking-wide transition-all shadow-lg backdrop-blur-sm group"
             >
-              <Play className="w-3.5 h-3.5 fill-current group-hover:translate-x-0.5 transition-transform" />
-              <span>Launch Interactive Demo</span>
-              <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-300 animate-pulse"></span>
+              <span className="font-bold">+</span>
+              <span>Launch Mission Control</span>
             </button>
           ) : (
             <button
@@ -169,9 +143,9 @@ export const Navbar: React.FC<NavbarProps> = ({
                 playSound('whoosh');
                 onViewChange('landing');
               }}
-              className="inline-flex items-center space-x-2 px-3.5 py-2 rounded-lg bg-slate-900 border border-slate-700 text-slate-200 text-xs font-mono font-medium hover:bg-slate-800 hover:border-slate-600 transition-all"
+              className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 text-white border border-white/20 text-xs font-medium transition-all"
             >
-              <span>← Back to Architecture</span>
+              <span>← Back to Overview</span>
             </button>
           )}
         </div>
