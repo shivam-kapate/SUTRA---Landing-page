@@ -1,14 +1,55 @@
 import React, { useState } from 'react';
-import { 
-  Eye, 
-  Layers, 
-  Database, 
-  Cpu, 
-  Radio, 
-  Terminal, 
-  CheckCircle2, 
-  Code2, 
-  Zap, 
+import {
+  Eye,
+  Layers,
+  Database,
+  Cpu,
+  Radio,
+  Terminal,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  CheckCircle2,
+  Code2,
+  Zap,
   Sparkles,
   ArrowRight,
   ShieldCheck,
@@ -208,7 +249,7 @@ export const ArchitecturePipeline: React.FC = () => {
             Interactive Technical Architecture Pipeline
           </h2>
           <p className="mt-3 text-base sm:text-lg text-slate-600">
-            A vertically integrated edge AI stack engineered specifically for zero-gravity perception, 
+            A vertically integrated edge AI stack engineered specifically for zero-gravity perception,
             microsecond action sequencing, and local cognitive autonomy on NVIDIA Jetson AGX Orin.
           </p>
         </div>
@@ -224,11 +265,10 @@ export const ArchitecturePipeline: React.FC = () => {
                   playSound('tab');
                   setActiveLayerId(layer.id);
                 }}
-                className={`p-5 rounded-2xl text-left border transition-all relative overflow-hidden flex flex-col justify-between shadow-sm ${
-                  isSelected
+                className={`p-5 rounded-2xl text-left border transition-all relative overflow-hidden flex flex-col justify-between shadow-sm ${isSelected
                     ? 'bg-white border-blue-500 ring-2 ring-blue-500/20 shadow-md text-slate-900'
                     : 'bg-white/60 border-slate-200 text-slate-600 hover:bg-white hover:border-slate-300'
-                }`}
+                  }`}
               >
                 {isSelected && (
                   <div className="absolute top-0 left-0 right-0 h-1.5 bg-blue-600"></div>
