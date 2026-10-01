@@ -39,10 +39,16 @@ export const CopilotShowcaseSection: React.FC = () => {
   const [inputQuery, setInputQuery] = useState('');
   const [isListening, setIsListening] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false);
+  const messagesContainerRef = useRef<HTMLDivElement | null>(null);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    // Keep chat auto-scroll inside its own message pane. scrollIntoView can
+    // also move the document, which sends the landing page to this section.
+    const container = messagesContainerRef.current;
+    if (container) {
+      container.scrollTo({ top: container.scrollHeight, behavior: 'smooth' });
+    }
   };
 
   const isInitialMount = useRef(true);
@@ -219,7 +225,7 @@ export const CopilotShowcaseSection: React.FC = () => {
             </div>
 
             {/* Chat Messages Stream */}
-            <div className="flex-1 overflow-y-auto space-y-4 py-4 pr-1">
+            <div ref={messagesContainerRef} className="flex-1 overflow-y-auto space-y-4 py-4 pr-1">
               {messages.map(msg => (
                 <div
                   key={msg.id}

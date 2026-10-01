@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { ViewMode } from './types';
 import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/LandingPage/HeroSection';
@@ -15,6 +15,14 @@ export function App() {
   const [currentView, setCurrentView] = useState<ViewMode>('landing');
   const [isSoundOn, setIsSoundOn] = useState<boolean>(true);
   const [activeSection, setActiveSection] = useState<string>('hero');
+
+  // Start at the hero instead of restoring an old browser scroll position.
+  useLayoutEffect(() => {
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+  }, []);
 
   const toggleSound = () => {
     const nextState = !isSoundOn;
